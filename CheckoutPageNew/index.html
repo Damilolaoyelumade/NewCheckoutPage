@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dami Couture - Checkout</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style2.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/normalize.css" />
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="checkout-image">
+                <div class="info">
+                    <div>
+                      <img src="images/Logocheckout.png" alt="logo">
+                     </div>
+                      <h1>Dami Couture</h1>
+                      <h4>The WearForever T-Shirt</h4>
+                      <h2>€5.83</h2>
+                      <p>
+                          <span>2-days shipping</span>
+                          <img src="https://img.icons8.com/sf-regular/48/aaaaaa/forward.png" alt="Arrow" height="15px" width="15px" />
+                      </p>
+                      <img class="product-img" src="images/myshirt.jpg" height="200px" alt="Product-Image" />
+                  </div>
+
+                  <div class="footer">
+
+                    <p>
+                        <span>Powered by <b>Checkout</b></span>
+                        <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-warning-ui-dreamstale-lineal-dreamstale.png" alt="Warning-icon" height="15px" width="15px" />
+                    </p>
+                    <select>
+                        
+                    </select>
+                  </div>
+                  
+                  
+            </div>
+
+
+
+            <div class="checkout-text">
+
+                <div class="pay-button">
+
+
+                    <button id="paymentButton" >
+                        <img src="images/gpay.png" alt="Google-pay" height="20px" width="80px" />
+                        
+                    </button>
+    
+                    <br><br>
+                    <button id="paymentButtonTransfer">Pay by Bank Transfer</button>
+                    </div>
+
+
+
+
+                    <div class="or-line">
+                        <p>Or pay with Card</p>
+                    </div>
+
+
+                    <form
+                    id="payment-form"
+                    method="POST"
+                    action="https://merchant.com/charge-card"
+                  >
+                    <label for="card-number">Card number</label>
+                    <div class="input-container card-number">
+                      <div class="icon-container">
+                        <img
+                          id="icon-card-number"
+                          src="images/card-icons/card.svg"
+                          alt="PAN"
+                        />
+                      </div>
+                      <div class="card-number-frame"></div>
+                      <div class="icon-container payment-method">
+                        <img id="logo-payment-method" />
+                      </div>
+                      <div class="icon-container">
+                        <img id="icon-card-number-error" src="images/card-icons/error.svg" />
+                      </div>
+                    </div>
+              
+                    <div class="date-and-code">
+                      <div>
+                        <label for="expiry-date">Expiry date</label>
+                        <div class="input-container expiry-date">
+                          <div class="icon-container">
+                            <img
+                              id="icon-expiry-date"
+                              src="images/card-icons/exp-date.svg"
+                              alt="Expiry date"
+                            />
+                          </div>
+                          <div class="expiry-date-frame"></div>
+                          <div class="icon-container">
+                            <img
+                              id="icon-expiry-date-error"
+                              src="images/card-icons/error.svg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+              
+                      <div>
+                        <label for="cvv">Security code</label>
+                        <div class="input-container cvv">
+                          <div class="icon-container">
+                            <img id="icon-cvv" src="images/card-icons/cvv.svg" alt="CVV" />
+                          </div>
+                          <div class="cvv-frame"></div>
+                          <div class="icon-container">
+                            <img id="icon-cvv-error" src="images/card-icons/error.svg" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <button id="pay-button" disabled="">
+                      PAY EUR 5.83
+                    </button>
+              
+                    <div>
+                      <span class="error-message error-message__card-number"></span>
+                      <span class="error-message error-message__expiry-date"></span>
+                      <span class="error-message error-message__cvv"></span>
+                    </div>
+              
+                    <p class="success-payment-message"></p>
+                  </form>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+<!-- Google pay -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          
+          const paymentButton = document.getElementById('paymentButton');
+      
+          const paymentLink = 'https://pay.sandbox.checkout.com/link/pl_xjX6OtWjfQ80?_pcf';
+      
+          paymentButton.addEventListener('click', function() {
+            
+            window.location.href = paymentLink;
+          });
+        });
+        </script>
+
+<!-- Payment by Bank Transfer -->
+
+
+    <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/payment_api.js"></script>
+
+<script>
+ 
+  document.addEventListener('DOMContentLoaded', function() {
+    const paymentButton = document.getElementById('paymentButtonTransfer');
+     
+    paymentButton.addEventListener('click', function() {
+      
+      const authorizationKey = 'Bearer sk_sbox_pap5sishsqa65dfybxnrpqfydaz';
+
+      const endpoint = 'https://api.sandbox.checkout.com/payments';
+
+      const payload = JSON.stringify(
+        {
+        "source": {
+          "type": "sofort"
+        },
+        "amount": 583,
+        "currency": "EUR",
+        "reference": "DamiCouture",
+        "processing_channel_id": "pc_zs5fqhybzc2e3jmq3efvybybpq"
+      }
+      );
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': authorizationKey
+        },
+        body: payload
+      })
+      .then(response => response.json())
+      .then(data => {
+      
+        if (data.status === 'Pending') {
+         
+          window.location.href = data._links.redirect.href;
+        } else {
+       
+          console.log('Payment status is not "Pending". '+data);
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+   
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>
